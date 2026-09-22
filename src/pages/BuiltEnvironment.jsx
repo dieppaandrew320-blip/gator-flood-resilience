@@ -2,6 +2,7 @@ import PageHeader from '../components/PageHeader'
 import Section from '../components/Section'
 import ComingSoon from '../components/ComingSoon'
 import CaseStudyList from '../components/CaseStudyList'
+import ExplainerGrid from '../components/ExplainerGrid'
 
 export default function BuiltEnvironment() {
   return (
@@ -16,18 +17,11 @@ export default function BuiltEnvironment() {
         title="The Basics"
         subtitle="Foundations, elevation, drainage, and materials — the fundamentals of flood-resilient construction."
       >
-        <ComingSoon>Explainers on foundations, elevation requirements, drainage design, and resilient materials.</ComingSoon>
+        <ExplainerGrid group="basics" />
       </Section>
 
       <Section title="Infrastructure Explainers" subtitle="How community-scale infrastructure protects us." className="bg-brand-blue-50/40">
-        <div className="grid gap-4 sm:grid-cols-3">
-          {['Levees', 'Pump Stations', 'Retention Systems'].map((topic) => (
-            <div key={topic} className="rounded-lg border border-dashed border-brand-blue-200 p-5 text-center">
-              <p className="font-semibold text-brand-blue-900">{topic}</p>
-              <p className="mt-1 text-sm text-brand-blue-500">Explainer coming soon</p>
-            </div>
-          ))}
-        </div>
+        <ExplainerGrid group="infrastructure" />
       </Section>
 
       <Section title="Diagrams & Visuals">
