@@ -10,6 +10,8 @@
 //   — controls which section of the Built Environment page links to it
 // kicker: optional one-line teaser shown under the title (both on cards
 //   and the detail page)
+// image: optional { url, alt, caption } — shown as the card thumbnail on
+//   list pages and as a captioned hero image at the top of the full post
 // body: array of content blocks. Each item is either:
 //   - a plain string -> rendered as a paragraph
 //   - { type: 'heading', text } -> rendered as a subheading
@@ -36,6 +38,11 @@ export const posts = [
     kicker: 'Why the right foundation depends on the kind of water a site will face.',
     date: '2026-09-16',
     summary: 'Why the right foundation depends on the kind of water a site will face.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1787641029577-79f190afdf5f?auto=format&fit=crop&w=1400&q=80',
+      alt: 'A white house elevated on open pilings above a sandy beach',
+      caption: 'An elevated home on open pilings — the accepted foundation type where waves and fast-moving water are possible.',
+    },
     body: [
       'In a flood hazard area, a foundation must do far more than carry the weight of a building. Floodwater pushes laterally against walls, lifts structures through buoyancy, strikes them with waves and floating debris, and erodes the soil that supports them. For this reason, the Florida Building Code requires that pile and column foundations in coastal high hazard areas be designed to resist flotation, collapse, and lateral movement under wind and flood loads acting at the same time, and that designers account for scour and erosion under base flood conditions, including wave action (University of Florida Building Codes Enforcement, n.d.).',
       { type: 'heading', text: 'Closed versus open foundations' },
@@ -65,6 +72,11 @@ export const posts = [
     kicker: 'How high is high enough, and who decides.',
     date: '2026-09-16',
     summary: 'How high is high enough, and who decides.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1783409608821-ff02bdb4fc9e?auto=format&fit=crop&w=1400&q=80',
+      alt: 'A corrugated metal building on tall stilts high above dark water',
+      caption: 'A structure built well above the surrounding water line. Florida code requires the lowest floor to sit at least one foot above the base flood elevation.',
+    },
     body: [
       'Elevation is the most direct way to keep floodwater out of living space. The regulatory benchmark is the base flood elevation (BFE): the height that the flood with a 1 percent chance of being equaled or exceeded in any given year is expected to reach, measured against a vertical datum such as the North American Vertical Datum of 1988 (FEMA, 2021). This event is often called the "100-year flood," a name that misleads many homeowners. A 1 percent annual chance does not mean one flood per century. Over the 30-year life of a typical mortgage, the probability of experiencing at least one such flood is roughly 26 percent (calculated as 1 minus 0.99 raised to the 30th power).',
       { type: 'heading', text: "Florida's standard: BFE plus freeboard" },
@@ -95,6 +107,11 @@ export const posts = [
     kicker: 'Moving rain off the land in one of the flattest, wettest places in the country.',
     date: '2026-09-16',
     summary: 'Moving rain off the land in one of the flattest, wettest places in the country.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1775986351678-c3085a922c6f?auto=format&fit=crop&w=1400&q=80',
+      alt: 'A concrete-lined drainage canal under a cloudy sky',
+      caption: "A concrete drainage canal — part of the layered network that moves rainfall off South Florida's flat, low-lying land.",
+    },
     body: [
       'South Florida drains through a layered, interconnected network. At the top is the regional Central and Southern Florida (C&SF) Project, operated by the South Florida Water Management District (SFWMD). This primary system of canals and natural waterways connects to community drainage districts and hundreds of neighborhood systems, which means flood control is a shared responsibility among the District, counties, cities, local drainage districts, homeowners associations, and residents (SFWMD, n.d.). The regional system alone includes more than 2,175 miles of canals, more than 2,130 miles of levees, over 936 water control structures, and 98 pump stations, much of it more than 60 years old (SFWMD, 2025).',
       { type: 'heading', text: 'Designing for a storm that has not happened yet' },
@@ -123,6 +140,11 @@ export const posts = [
     kicker: 'Building the parts that will get wet so they survive getting wet.',
     date: '2026-09-16',
     summary: 'Building the parts that will get wet so they survive getting wet.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1764856601179-dfeca7b37e4c?auto=format&fit=crop&w=1400&q=80',
+      alt: 'Construction workers pouring concrete with a wheelbarrow',
+      caption: 'Materials used below the base flood elevation must be able to survive direct, prolonged contact with floodwater and still be reusable.',
+    },
     body: [
       'Flood-resilient design begins with an honest assumption: everything below the required flood elevation will eventually be submerged. Federal rules therefore require that all construction below the BFE use flood damage-resistant materials (FEMA, 2008b). The Florida Building Code applies the same principle to flooring, interior and exterior walls, and wall coverings installed below the required elevation (Florida Building Commission, 2023). A material qualifies when it can withstand direct and prolonged contact with floodwater and then be cleaned and returned to use, rather than removed and replaced.',
       { type: 'heading', text: 'How materials are rated' },
@@ -153,6 +175,12 @@ export const posts = [
     kicker: 'Barriers that reduce flood risk, and why "reduce" is the key word.',
     date: '2026-09-16',
     summary: 'Barriers that reduce flood risk, and why "reduce" is the key word.',
+    image: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/b/b0/Herbert_Hoover_Dike_Construction_1968_3_of_3.jpg',
+      alt: 'A water control structure on the Herbert Hoover Dike during 1968 rehabilitation work',
+      caption:
+        "The Herbert Hoover Dike's water control structure at Canal Point, Florida, during 1968 U.S. Army Corps of Engineers rehabilitation work. (Public domain, U.S. Army Corps of Engineers.)",
+    },
     body: [
       'A levee is a human-made barrier, usually an earthen embankment, built to reduce how often floodwater reaches part of a floodplain (U.S. Army, 2024). Across the United States, roughly 25,000 miles of levees reduce risk to more than 17 million people and over $2 trillion in property (U.S. Army Corps of Engineers [USACE], n.d.). The true total is uncertain: the National Levee Database lists nearly 7,000 levee systems, but one estimate suggests there may be as many as 100,000 miles of nonfederal levees nationwide (ASCE, 2025b). In its 2025 Report Card, ASCE raised the national levee grade from a D to a D+, an improvement that still signals serious deficiencies (ASCE, 2025a).',
       { type: 'heading', text: 'How levees fail' },
@@ -187,6 +215,11 @@ export const posts = [
     kicker: 'What happens when gravity is no longer enough.',
     date: '2026-09-16',
     summary: 'What happens when gravity is no longer enough.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1693463735697-73df1f35930d?auto=format&fit=crop&w=1400&q=80',
+      alt: 'Industrial pipes and valves used in water pumping systems',
+      caption: "When gravity can no longer drain a flooded street, pump stations mechanically lift water over the obstacle and discharge it downstream.",
+    },
     body: [
       'Most drainage systems rely on gravity: water flows downhill from streets to pipes to canals to the sea. That arrangement only works while the outlet sits lower than the water being drained. In a landscape as flat as South Florida, a high tide, a storm surge, or a full canal can erase that difference in elevation and stop drainage entirely. Sea level rise makes this more common. Modeling by the U.S. Geological Survey found that when rising seas surpass the control elevations of gravity-driven coastal structures, water backs up in the connected canals and raises groundwater levels that can spread inland (Decker, 2022). Pump stations solve this problem by mechanically lifting water over the obstacle and discharging it downstream.',
       { type: 'heading', text: 'Regional scale: moving rivers of water' },
@@ -219,6 +252,11 @@ export const posts = [
     kicker: 'The ponds behind every Florida subdivision, and the work they quietly do.',
     date: '2026-09-16',
     summary: 'The ponds behind every Florida subdivision, and the work they quietly do.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1785301694816-cf07462b4dae?auto=format&fit=crop&w=1400&q=80',
+      alt: 'Aerial view of a stormwater pond bordering a suburban neighborhood',
+      caption: "A stormwater pond bordering a residential development — Florida's primary tool for controlling runoff from new construction.",
+    },
     body: [
       'When land is developed, roofs and pavement replace soil and vegetation, so more rain runs off, and it runs off faster. Stormwater ponds are Florida\'s primary answer to that change. They are typically designed to hold post-development runoff to pre-development conditions, either by storing and slowly releasing the extra runoff or by letting it soak into the ground, and to remove pollutants through settling and biological uptake (Davtalab et al., 2020).',
       { type: 'heading', text: 'Retention versus detention' },

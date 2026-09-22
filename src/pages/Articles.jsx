@@ -1,14 +1,8 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import PageHeader from '../components/PageHeader'
 import Section from '../components/Section'
+import ArticleRow from '../components/ArticleRow'
 import { getArticles, CATEGORY_LABELS } from '../content/posts'
-
-function formatDate(dateStr) {
-  const date = new Date(`${dateStr}T00:00:00`)
-  if (Number.isNaN(date.getTime())) return dateStr
-  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
-}
 
 export default function Articles() {
   const [activeCategory, setActiveCategory] = useState(null)
@@ -51,33 +45,25 @@ export default function Articles() {
         </div>
       </Section>
 
-      <Section title="Archive" className="bg-brand-blue-50/40">
+      <Section title="Archive" maxWidth="max-w-3xl" className="bg-brand-blue-50/40">
         {visibleArticles.length === 0 ? (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="rounded-xl border border-dashed border-brand-blue-200 bg-white p-6">
-                <p className="text-xs font-semibold uppercase tracking-wide text-brand-orange-600">Coming Soon</p>
-                <div className="mt-3 h-4 w-3/4 rounded bg-brand-blue-100" />
-                <div className="mt-2 h-3 w-full rounded bg-brand-blue-50" />
-                <div className="mt-1 h-3 w-5/6 rounded bg-brand-blue-50" />
+          <div className="space-y-6">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="flex flex-col gap-5 border-b border-brand-blue-100 py-6 last:border-b-0 sm:flex-row">
+                <div className="aspect-[4/3] rounded-lg bg-brand-blue-100 sm:w-64 sm:shrink-0" />
+                <div className="flex flex-1 flex-col justify-center gap-2">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-brand-orange-600">Coming Soon</p>
+                  <div className="h-5 w-2/3 rounded bg-brand-blue-100" />
+                  <div className="h-3 w-full rounded bg-brand-blue-50" />
+                  <div className="h-3 w-5/6 rounded bg-brand-blue-50" />
+                </div>
               </div>
             ))}
           </div>
         ) : (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div>
             {visibleArticles.map((article) => (
-              <Link
-                key={article.slug}
-                to={`/articles/${article.slug}`}
-                className="rounded-xl border border-brand-blue-100 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-              >
-                <p className="text-xs font-semibold uppercase tracking-wide text-brand-orange-600">
-                  {CATEGORY_LABELS[article.category] || 'Article'}
-                </p>
-                <h3 className="mt-2 font-semibold text-brand-blue-900">{article.title}</h3>
-                {article.summary && <p className="mt-2 text-sm text-brand-blue-600">{article.summary}</p>}
-                <p className="mt-3 text-xs text-brand-blue-400">{formatDate(article.date)}</p>
-              </Link>
+              <ArticleRow key={article.slug} post={article} />
             ))}
           </div>
         )}

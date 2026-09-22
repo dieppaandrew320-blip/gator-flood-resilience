@@ -123,13 +123,27 @@ export default function Home() {
                 <Link
                   key={article.slug}
                   to={`/articles/${article.slug}`}
-                  className="rounded-xl border border-brand-blue-100 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                  className="group overflow-hidden rounded-xl border border-brand-blue-100 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
                 >
-                  <p className="text-xs font-semibold uppercase tracking-wide text-brand-orange-600">
-                    {CATEGORY_LABELS[article.category] || 'Article'}
-                  </p>
-                  <h3 className="mt-2 font-semibold text-brand-blue-900">{article.title}</h3>
-                  {article.summary && <p className="mt-2 text-sm text-brand-blue-600">{article.summary}</p>}
+                  {article.image ? (
+                    <img
+                      src={article.image.url}
+                      alt={article.image.alt || ''}
+                      className="aspect-video w-full object-cover"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="flex aspect-video w-full items-center justify-center bg-brand-blue-50 text-xs font-medium text-brand-blue-300">
+                      No image yet
+                    </div>
+                  )}
+                  <div className="p-6">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-brand-orange-600">
+                      {CATEGORY_LABELS[article.category] || 'Article'}
+                    </p>
+                    <h3 className="mt-2 font-semibold text-brand-blue-900 group-hover:text-brand-orange-600">{article.title}</h3>
+                    {article.summary && <p className="mt-2 text-sm text-brand-blue-600">{article.summary}</p>}
+                  </div>
                 </Link>
               ))}
         </div>

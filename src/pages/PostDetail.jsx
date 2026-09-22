@@ -60,6 +60,21 @@ export default function PostDetail() {
           )}
         </div>
 
+        {post.image && (
+          <figure className="mb-8">
+            <img
+              src={post.image.url}
+              alt={post.image.alt || ''}
+              className="w-full rounded-xl border border-brand-blue-100 object-cover"
+              style={{ aspectRatio: '16 / 9' }}
+              loading="lazy"
+            />
+            {post.image.caption && (
+              <figcaption className="mt-2 text-sm text-brand-blue-500">{post.image.caption}</figcaption>
+            )}
+          </figure>
+        )}
+
         <div className="space-y-4 text-brand-blue-800">
           {post.body.map((block, i) => (
             <BodyBlock key={i} block={block} />

@@ -56,27 +56,48 @@ object to the array:
   slug: 'unique-url-slug',           // becomes /articles/unique-url-slug
   type: 'article',                    // or 'case-study'
   category: 'engineering-explainers', // see CATEGORY_LABELS in the same file (articles only)
+  explainerGroup: 'basics',           // 'basics' | 'infrastructure' — Built Environment articles only
   section: 'built-environment',       // 'built-environment' | 'social-policy' (case studies only)
   title: 'Article Title',
+  kicker: 'One-line teaser shown under the title on cards and the detail page.',
   date: '2026-09-22',                 // YYYY-MM-DD
   author: 'Author Name',              // optional
-  summary: 'One-sentence teaser shown on list/preview cards.',
+  summary: 'One-sentence teaser shown on list/preview cards (falls back to kicker if omitted).',
+  image: {                            // optional but recommended — shows as the card thumbnail
+    url: 'https://images.unsplash.com/photo-xxxx?auto=format&fit=crop&w=1400&q=80',
+    alt: 'Description for screen readers',
+    caption: 'Shown under the hero image on the full article page, including photo credit if needed.',
+  },
   body: [
     'First paragraph.',
-    'Second paragraph.',
-    // one string per paragraph — no markdown support yet, plain text only
+    { type: 'heading', text: 'A subheading' },
+    'Paragraph under the subheading.',
+    // strings become paragraphs; { type: 'heading', text } becomes a subheading
+  ],
+  takeaway: 'Optional highlighted "Key takeaway" callout shown after the body.',
+  references: [
+    { text: 'Author. (Year). Title of source.', url: 'https://example.com' },
+    // optional — renders as a collapsible, linked citation list
   ],
 }
 ```
 
 - **Articles** (`type: 'article'`) automatically appear on the Articles
-  page (filterable by category), the 3 most recent on the Home page, and
-  get their own page at `/articles/<slug>`.
+  page (filterable by category, shown as a vertical list with images),
+  the 3 most recent on the Home page, and get their own page at
+  `/articles/<slug>`. Built Environment articles with `explainerGroup`
+  set also appear as cards in that page's "Basics" or "Infrastructure"
+  section.
 - **Case studies** (`type: 'case-study'`) automatically appear on either
   the Built Environment or Social & Policy page depending on `section`,
   and get their own page at `/case-studies/<slug>`.
 - An empty `posts` array (the default) shows the original "Coming Soon"
   placeholders everywhere — nothing else needs to change.
+- **Images**: find a relevant photo on [Unsplash](https://unsplash.com)
+  (free to use) or [Wikimedia Commons](https://commons.wikimedia.org)
+  (search for public-domain government/engineering photos — often a
+  better topical match, as with the real 1968 USACE photo used for the
+  Levees article). Grab the direct image URL and add it as `image.url`.
 
 No new files, routes, or components needed per post. Paste the text to
 Claude and it'll add the entry, or edit `src/content/posts.js` directly.
