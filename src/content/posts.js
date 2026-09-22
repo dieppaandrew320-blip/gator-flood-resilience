@@ -12,9 +12,17 @@
 //   and the detail page)
 // image: optional { url, alt, caption } — shown as the card thumbnail on
 //   list pages and as a captioned hero image at the top of the full post
-// body: array of content blocks. Each item is either:
+// tag (case studies only): short badge shown in place of the "Case Study"
+//   eyebrow, e.g. 'Construction', 'Preparedness'
+// stats: optional array of { label, value } shown as an "at a glance"
+//   card grid near the top of the post (storm category, death toll, etc.)
+// body: array of content blocks. Each item is one of:
 //   - a plain string -> rendered as a paragraph
 //   - { type: 'heading', text } -> rendered as a subheading
+//   - { type: 'list', items } -> bullet list. Each item is a string, or
+//     { bold, text } for a bold lead-in phrase followed by normal text
+//   - { type: 'table', headers, rows } -> headers is an array of column
+//     names; rows is an array of arrays of cell values
 // takeaway: optional string, rendered as a highlighted "Key takeaway" box
 // references: optional array of { text, url } -> rendered as a citation
 //   list at the bottom of the article
@@ -275,6 +283,242 @@ export const posts = [
       { text: 'Florida Stormwater Association. (2007). Evaluation of current stormwater design criteria within the State of Florida.', url: 'https://www.florida-stormwater.org/assets/MemberServices/Advocacy/Final%20Report%20-%20SW%20Design%20Criteria-June07.pdf' },
       { text: "SCS Engineers. (2026, January 13). Florida stormwater regulations: What's changing under SB 7040.", url: 'https://www.scsengineers.com/florida-stormwater-regulations-whats-changing-under-sb-7040/' },
       { text: 'St. Johns River Water Management District. (2025). Stormwater systems and how they work.', url: 'https://www.sjrwmd.com/hoa-resources/stormwater-systems/' },
+    ],
+  },
+  {
+    slug: 'flood-zones-and-maps',
+    type: 'article',
+    category: 'engineering-explainers',
+    explainerGroup: 'basics',
+    title: 'Flood Zones and Flood Maps',
+    kicker: 'What the letters on a FEMA map mean, and what they leave out.',
+    date: '2026-09-22',
+    summary: 'What the letters on a FEMA map mean, and what they leave out.',
+    image: {
+      url: 'https://commons.wikimedia.org/wiki/Special:FilePath/FIRM,_flood_insurance_rate_map,_borough_of_Harveys_Lake,_Pennsylvania,_Luzerne_County._LOC_95683580.tif?width=1400',
+      alt: 'A historic Flood Insurance Rate Map showing shaded floodplain boundaries',
+      caption: 'A Flood Insurance Rate Map (FIRM) from the National Flood Insurance Program — the same kind of document that assigns every address a flood zone letter. (Public domain, Library of Congress.)',
+    },
+    body: [
+      "Almost every flood-resilient design decision in the United States begins with a Flood Insurance Rate Map (FIRM). FEMA defines the FIRM as the official community map that delineates both the Special Flood Hazard Areas and the flood zones that apply to the community, and it is used for floodplain management, mitigation, and insurance alike (FEMA, 2022). Anyone can look up the effective map for an address through FEMA's Flood Map Service Center at msc.fema.gov (FEMA, 2022).",
+      { type: 'heading', text: 'The Special Flood Hazard Area' },
+      'The Special Flood Hazard Area (SFHA) is the land expected to be inundated by the flood that has a 1 percent chance of being equaled or exceeded in any given year. On the map, the SFHA is made up of zones beginning with the letters A or V. Property owners in the SFHA who hold mortgages from federally regulated or insured lenders are required to buy flood insurance (FEMA, 2022). The SFHA is also where the elevation, foundation, and materials rules described elsewhere in this series apply.',
+      { type: 'heading', text: 'Reading the zone codes' },
+      {
+        type: 'table',
+        headers: ['Zone', 'Risk level', 'What it means'],
+        rows: [
+          ['A', 'High', '1 percent annual chance floodplain mapped with approximate methods; no base flood elevation (BFE) is published.'],
+          ['AE', 'High', '1 percent annual chance floodplain mapped with detailed methods; BFEs are shown.'],
+          ['AH / AO', 'High', 'Shallow flooding of about 1 to 3 feet: ponding (AH) or sheet flow on sloping ground (AO).'],
+          ['V / VE', 'High', 'Coastal areas where the 1 percent annual chance flood also brings storm-driven wave action. VE zones show BFEs.'],
+          ['X (shaded)', 'Moderate', 'Between the 1 percent and 0.2 percent annual chance floodplains (the "500-year" floodplain).'],
+          ['X (unshaded)', 'Minimal', 'Outside the 0.2 percent annual chance floodplain.'],
+          ['D', 'Undetermined', 'Flood risk is possible, but no hazard analysis has been performed.'],
+        ],
+      },
+      'Zone definitions adapted from First Street Foundation (n.d.) and FEMA (2022). Coastal maps may also show a Limit of Moderate Wave Action (LiMWA). The area between the LiMWA and the V Zone is the Coastal A Zone, where breaking waves of 1.5 feet or more are still possible and where Florida generally requires V Zone construction standards (FEMA, 2021).',
+      { type: 'heading', text: 'What the map does not tell you' },
+      'A flood map is a regulatory tool, not a forecast. It shows the flood hazard as it was modeled when the map was produced, usually from historical rainfall and tide data. It does not reflect future sea level rise, and it cannot capture every local drainage problem. The result is that a large share of flood losses occur where the map suggests low risk: FEMA reports that about 40 percent of National Flood Insurance Program claims come from outside high-risk flood zones (FEMA, 2023). Most standard homeowners policies do not cover flood damage, and a typical NFIP policy does not take effect until 30 days after purchase (FEMA, 2023), so waiting until a storm is forecast is too late.',
+      'Maps can also be corrected. Property owners who believe their structure was wrongly placed in the SFHA may request an official amendment, known as a Letter of Map Amendment (LOMA) or Letter of Map Revision (LOMR) (FEMA, 2022).',
+    ],
+    takeaway:
+      'The zone letter tells you the minimum rules that apply to a site. It does not tell you the maximum water that can arrive there.',
+    references: [
+      { text: 'Federal Emergency Management Agency. (2021). Design and construction guidance for breakaway walls (NFIP Technical Bulletin 9).', url: 'https://www.fema.gov/sites/default/files/documents/fema_nfip-technical-bulletin-9-09292021.pdf' },
+      { text: 'Federal Emergency Management Agency. (2022). How to read a flood map.', url: 'https://www.fema.gov/sites/default/files/documents/how-to-read-flood-insurance-rate-map-tutorial.pdf' },
+      { text: 'Federal Emergency Management Agency. (2023). NFIP insurance media toolkit.', url: 'https://www.dnrc.mt.gov/_docs/water/Floodplains/Insurance/fema_nfip-insurance-media-toolkit-07-2023.pdf' },
+      { text: 'First Street Foundation. (n.d.). Understand the differences between FEMA flood zones.', url: 'https://help.firststreet.org/hc/en-us/articles/360048256493-Understand-the-differences-between-FEMA-flood-zones' },
+    ],
+  },
+  {
+    slug: 'wet-and-dry-floodproofing',
+    type: 'article',
+    category: 'engineering-explainers',
+    explainerGroup: 'basics',
+    title: 'Wet and Dry Floodproofing',
+    kicker: 'Two opposite strategies: keep the water out, or let it in on your terms.',
+    date: '2026-09-22',
+    summary: 'Two opposite strategies: keep the water out, or let it in on your terms.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1745680636997-dca47973113d?auto=format&fit=crop&w=1400&q=80',
+      alt: 'Sandbags stacked against a wall as a flood barrier',
+      caption: 'Sandbags are a simple, temporary form of dry floodproofing — sealing an opening so water cannot get in.',
+    },
+    body: [
+      'Elevation is the preferred way to protect a building from flooding, but it is not always practical. Existing commercial buildings, historic structures, garages, and storage areas often cannot be lifted. For these cases, FEMA recognizes two floodproofing strategies that work in opposite ways. Dry floodproofing tries to keep floodwater out entirely. Wet floodproofing deliberately lets it in.',
+      { type: 'heading', text: 'Dry floodproofing: sealing the envelope' },
+      'FEMA defines dry floodproofing as a combination of measures that make a building and its utilities watertight and substantially impermeable to floodwater, with structural components able to resist flood loads (FEMA, 2021a). "Substantially impermeable" has a precise meaning: seepage through joints, cracks, and openings may not accumulate more than 4 inches of water in 24 hours without pumps (FEMA, 2021a). Typical measures include waterproof coatings or membranes on walls, backflow valves on sewer lines, and removable flood shields or automatic barriers across doors and windows.',
+      'The limits are strict. Under the National Flood Insurance Program, dry floodproofing is allowed only for nonresidential buildings and the nonresidential portions of mixed-use buildings. It is not permitted for residential buildings, and it is not permitted for any building in Zone V (FEMA, 2021a). The measures must extend to the highest of the BFE, BFE plus one foot under ASCE 24, or any higher local requirement, and a registered design professional must certify the design (FEMA, 2021a). The physics explain the caution. A sealed wall holding back water feels the full hydrostatic and buoyant force of the flood, so FEMA recommends dry floodproofing only where flood depths do not exceed about 3 feet, velocities stay at or below 5 feet per second, and moderate wave action is absent (FEMA, 2021a).',
+      'Many dry floodproofing systems also depend on people. If shields must be installed by hand, FEMA requires at least 12 hours of flood warning, a flood emergency operations plan, an annual inspection and maintenance plan, and regular deployment drills (FEMA, 2021a). A barrier stored in the wrong closet provides no protection.',
+      { type: 'heading', text: 'Wet floodproofing: letting water in safely' },
+      'Wet floodproofing uses flood damage-resistant materials and construction techniques to minimize damage by intentionally allowing floodwater to enter and exit automatically (FEMA, 2022). Because water fills the space on both sides of the wall, the pressure equalizes and the wall is not pushed inward. The key components are flood openings that work without human intervention, flood damage-resistant materials below the BFE, elevated mechanical and utility equipment, and anchoring against flotation and lateral movement (FEMA, 2022).',
+      'Flood openings follow simple rules. For non-engineered openings, a building needs at least two openings on different walls, the bottom of each opening must be within one foot of the adjacent grade, and the openings must provide one square inch of net open area for every square foot of enclosed floor area (American Surveyor, 2020). Their purpose is to equalize hydrostatic pressure so that walls are not damaged or collapsed by standing or slow-moving water (American Surveyor, 2020). Engineered openings that provide equivalent performance with fewer or smaller vents are allowed when certified (American Surveyor, 2020).',
+      'Wet floodproofing has its own limits. It may be used for enclosures below elevated buildings used only for parking, building access, or storage; for attached garages; and for certain accessory and agricultural structures. Historic structures and functionally dependent uses may qualify by variance. It may never be used for residential living space (FEMA, 2022).',
+      {
+        type: 'table',
+        headers: ['', 'Dry floodproofing', 'Wet floodproofing'],
+        rows: [
+          ['Strategy', 'Keep water out', 'Let water in and out'],
+          ['Who may use it', 'Nonresidential only; not in Zone V', 'Parking, access, and storage enclosures; garages; some accessory, agricultural, and historic structures'],
+          ['Main risk', 'Wall failure or buoyancy if water is deeper than designed', 'Damage to contents and finishes that are not flood-resistant'],
+          ['Human action needed?', 'Often (shields must be deployed)', 'No; openings must work automatically'],
+        ],
+      },
+    ],
+    takeaway:
+      'Dry floodproofing fights the flood and works only when the flood is shallow and slow. Wet floodproofing yields to the flood and works only when nothing valuable is in the way.',
+    references: [
+      { text: 'American Surveyor. (2020, July 12). FEMA NFIP Technical Bulletin 1 (2020).', url: 'https://amerisurv.com/2020/07/12/fema-nfip-technical-bulletin-1-2020/' },
+      { text: 'Federal Emergency Management Agency. (2021a). Requirements for the design and certification of dry floodproofed non-residential and mixed-use buildings (NFIP Technical Bulletin 3).', url: 'https://www.fema.gov/sites/default/files/documents/fema_technical-bulletin-3_1-2021.pdf' },
+      { text: 'Federal Emergency Management Agency. (2022). Wet floodproofing requirements and limitations (NFIP Technical Bulletin 7).', url: 'https://dnrc.mt.gov/_docs/water/Floodplains/Permits-Regulations/2022fema_nfip-technical-bulletin-7-wet-floodproofing-guidance.pdf' },
+    ],
+  },
+  {
+    slug: 'sand-palace-mexico-beach',
+    type: 'case-study',
+    section: 'built-environment',
+    tag: 'Construction',
+    title: 'The "Sand Palace": Building Above Code in Mexico Beach',
+    kicker: 'Hurricane Michael, Florida Panhandle, 2018',
+    date: '2026-09-22',
+    summary: 'One newly built beachfront home survived where 85% of the town was destroyed. Here is what its owners built differently.',
+    image: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/1/13/Severe_destruction_in_Mexico_Beach%2C_FL.jpg',
+      alt: 'Widespread destruction of homes in Mexico Beach, Florida after Hurricane Michael',
+      caption: "The scene in Mexico Beach, Florida days after Hurricane Michael's Category 5 landfall in October 2018. (Public domain, Voice of America.)",
+    },
+    stats: [
+      { label: 'Storm', value: 'Category 5, 160 mph' },
+      { label: 'Peak surge', value: 'About 14 ft above ground' },
+      { label: 'Town impact', value: '~85% of buildings destroyed' },
+      { label: 'Extra cost', value: '15–20% of structural cost' },
+    ],
+    body: [
+      { type: 'heading', text: 'The storm' },
+      'On October 10, 2018, Hurricane Michael made landfall near Mexico Beach and Tyndall Air Force Base on the Florida Panhandle with maximum sustained winds of 140 knots (about 160 mph) and a minimum central pressure of 919 millibars (Beven et al., 2019). After a post-storm reanalysis, NOAA upgraded Michael to Category 5 at landfall, making it only the fourth Category 5 hurricane on record to strike the United States, after the 1935 Labor Day Hurricane, Camille in 1969, and Andrew in 1992 (NOAA, 2019). A U.S. Geological Survey sensor on the Mexico Beach pier recorded a water level of 15.55 feet above the North American Vertical Datum of 1988, and the National Hurricane Center estimated maximum inundation of about 14 feet above ground in the area (Beven et al., 2019). Michael caused 16 direct deaths and about $25 billion in damage nationally, including roughly $18.4 billion in Florida (Beven et al., 2019). In Mexico Beach, about 85 percent of buildings were destroyed (NPR, 2022).',
+      { type: 'heading', text: 'The house' },
+      'Amid that destruction, one newly built beachfront home remained standing. Its owners, Dr. Lebron Lackey and his uncle Russell King, had finished it only months earlier with a simple design question: "What would survive the big one?" (CNN, 2018). Florida\'s code at that location required design for 120 mph winds; the owners designed for roughly 240 to 250 mph (CNN, 2018). Key features included:',
+      {
+        type: 'list',
+        items: [
+          { bold: 'Deep foundation.', text: 'Concrete pilings were driven 40 feet deep, deeper than the 30 feet initially recommended (AccuWeather, 2018; FEMA, n.d.).' },
+          { bold: 'Reinforced concrete walls.', text: 'Poured concrete walls with rebar throughout, plus steel cables running from the girders through the roof and down the opposite wall (CNN, 2018).' },
+          { bold: 'Wind-shedding roof.', text: 'A hip roof with minimal overhangs, which reduces the surfaces wind can catch and lift (FEMA, n.d.), fastened with engineered metal connectors (Simpson Strong-Tie, 2018).' },
+          { bold: 'Sacrificial ground floor.', text: 'The ground level and the stairs to the middle floor were designed to break away, allowing surge and waves to pass beneath the living space (AccuWeather, 2018).' },
+        ],
+      },
+      { type: 'heading', text: 'How it performed' },
+      'The breakaway elements did exactly what they were designed to do. The ground floor and lower stairs were destroyed, several bedroom windows were damaged, one HVAC unit was lost, and the utilities needed replacement. The roof and elevated structure remained intact (AccuWeather, 2018). The owners estimated the upgrades added 15 to 20 percent to structural costs, which FEMA notes was less than 10 percent of total construction cost (FEMA, n.d.). Lackey was clear about the purpose of the design: "We built what we thought was a hurricane-proof home, so we would have something to come back to, not so that we would have something to stay at" (AccuWeather, 2018).',
+      { type: 'heading', text: 'Lessons' },
+      "The Sand Palace is an extreme example, but FEMA's broader review of Michael points in the same direction. Homes built after the statewide Florida Building Code took effect in 2002 performed relatively well, while the majority of older homes in Mexico Beach were destroyed (FEMA, n.d.). Mexico Beach's rebuilding rules now require new structures to withstand 140 mph winds and sit about 6 feet higher than pre-storm construction (NPR, 2022). The case also carries a caution: building above code protects property, not people who stay behind. Surge is the deadliest part of a hurricane, and evacuation remains essential no matter how strong the house.",
+    ],
+    takeaway:
+      'Code is a minimum. A modest premium spent on foundations, connections, and breakaway lower levels can decide whether an owner returns to a house or to a slab.',
+    references: [
+      { text: 'AccuWeather. (2018). "We built it for the big one": How this Mexico Beach house survived Hurricane Michael.', url: 'https://www.accuweather.com/en/weather-news/we-built-it-for-the-big-one-how-this-mexico-beach-house-survived-hurricane-michael/342440' },
+      { text: 'Beven, J. L., II, Berg, R., & Hagen, A. (2019). National Hurricane Center tropical cyclone report: Hurricane Michael (AL142018). National Hurricane Center.', url: 'https://www.nhc.noaa.gov/data/tcr/AL142018_Michael.pdf' },
+      { text: 'CNN. (2018, October 15). This "Sand Palace" on Mexico Beach survived Hurricane Michael. That\'s no coincidence.', url: 'https://edition.cnn.com/2018/10/15/us/mexico-beach-house-hurricane-trnd/index.html' },
+      { text: "Federal Emergency Management Agency. (n.d.). The role of Florida's building codes in 2018 Hurricane Michael.", url: 'https://www.fema.gov/case-study/role-floridas-building-codes-2018-hurricane-michael' },
+      { text: 'National Oceanic and Atmospheric Administration. (2019). Hurricane Michael upgraded to a Category 5 at time of U.S. landfall.', url: 'https://www.noaa.gov/media-release/hurricane-michael-upgraded-to-category-5-at-time-of-us-landfall' },
+      { text: 'NPR. (2022, June 1). 3 years after being leveled by Hurricane Michael, Mexico Beach is coming back.', url: 'https://www.npr.org/2022/06/01/1101304201/3-years-after-being-leveled-by-hurricane-michael-mexico-beach-is-coming-back' },
+      { text: 'Simpson Strong-Tie. (2018). Made even stronger: Mexico Beach home rides out Hurricane Michael.', url: 'https://blog.strongtie.com/made-even-stronger-mexico-beach-home-rides-hurricane-michael/' },
+    ],
+  },
+  {
+    slug: 'babcock-ranch',
+    type: 'case-study',
+    section: 'built-environment',
+    tag: 'Engineering and planning',
+    title: 'Babcock Ranch: A Town Designed for the Storm',
+    kicker: 'Hurricane Ian, Southwest Florida, 2022',
+    date: '2026-09-22',
+    summary: 'A planned community 30 miles inland kept power and stayed dry while Hurricane Ian devastated the coast.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1723133371535-1412bc2e412e?auto=format&fit=crop&w=1400&q=80',
+      alt: 'Aerial view of rows of solar panels separated by strips of green grass',
+      caption: "Babcock Ranch's 870-acre solar array — up to 150 megawatts of generating capacity, paired with battery storage, helped keep the town powered through Hurricane Ian.",
+    },
+    stats: [
+      { label: 'Storm', value: 'Category 4 at landfall' },
+      { label: 'Florida toll', value: '66 direct deaths' },
+      { label: 'Town outcome', value: 'Power stayed on, no flooding' },
+      { label: 'Solar array', value: '870 acres, up to 150 MW' },
+    ],
+    body: [
+      { type: 'heading', text: 'The storm' },
+      'Hurricane Ian reached Category 5 intensity over the Gulf of Mexico on September 28, 2022, then came ashore in Southwest Florida as a strong Category 4 hurricane, making a second landfall near Punta Gorda with estimated winds of 125 knots (Bucci et al., 2023). Storm surge caused the worst damage. At Fort Myers Beach, inundation reached an estimated 10 to 15 feet above ground, and surge was responsible for 41 deaths, 36 of them in Lee County. All 66 deaths directly caused by Ian in the United States occurred in Florida. With about $112.9 billion in damage, Ian became the costliest hurricane in Florida\'s history and the third costliest in U.S. history (Bucci et al., 2023).',
+      { type: 'heading', text: 'The design' },
+      'About 30 miles inland, straddling Charlotte and Lee counties, Babcock Ranch had been planned from the start with storms in mind. The developer, Kitson & Partners, sold about 73,000 of the original 91,000 acres to the state for permanent preservation, leaving roughly 18,000 acres for the town (Reid, 2024). Its resilience rests on several engineered systems:',
+      {
+        type: 'list',
+        items: [
+          { bold: 'Stormwater that follows the land.', text: 'Engineers used aerial surveys from the 1940s and 1950s to trace historic flow-ways and designed the drainage around them. Former mining pits were joined into a 320-acre lake, and about 2.5 million cubic yards of excavated soil raised building sites 3 to 6 feet with no imported fill. Streets use rain gardens instead of the usual curb-and-inlet system, and some control structures have solar-powered, remotely operated weirs (Reid, 2024).' },
+          { bold: 'Hardened power.', text: 'An 870-acre solar array with about 687,000 panels can generate up to 150 megawatts, supported by 10 megawatts of battery storage. Power lines are buried and concrete poles are used where poles are needed (Reid, 2024).' },
+          { bold: 'Stronger buildings.', text: 'Homes exceed the Florida Building Code, with continuous load paths from roof to foundation, hurricane straps, rebar-filled masonry walls, and impact glass or shutters on every structure (Reid, 2024).' },
+          { bold: 'A built-in shelter.', text: 'A 40,000-square-foot school athletic facility doubles as a hurricane shelter (Reid, 2024).' },
+        ],
+      },
+      { type: 'heading', text: 'How it performed' },
+      'Residents experienced winds of roughly 100 mph (NPR, 2022). Babcock Ranch reported no flooding and kept electricity, water, sewer, and internet service running; engineers described it as "basically the only place in southwest Florida that had power" (Reid, 2024). Damage was limited mostly to landscaping, a traffic light, and street signs (NPR, 2022). The shelter housed evacuees from surrounding communities rather than Babcock\'s own residents (Reid, 2024).',
+      { type: 'heading', text: 'Limits and lessons' },
+      'The result is encouraging, but it should be read carefully. Babcock Ranch sits about 30 feet above sea level and 30 miles from the Gulf, far beyond the reach of the surge that caused most of Ian\'s deaths. It was built on a nearly blank site, which is rare for existing cities. Only about 5,000 of an eventual 50,000 residents lived there during Ian, and the town still draws power from the wider grid during periods of high demand (Reid, 2024). Sustainability consultant Jennifer Languell warned against overconfidence, noting that a direct Category 5 strike could still reveal weaknesses (NPR, 2022). The transferable lessons are the systems themselves: drainage designed around natural flow paths, buried and redundant utilities, and code-plus construction.',
+    ],
+    takeaway:
+      'Resilience is most affordable at the planning stage. Where a town is sited and how its water and power are routed matter as much as how its houses are built.',
+    references: [
+      { text: 'Bucci, L., Alaka, L., Hagen, A., Delgado, S., & Beven, J. (2023, revised 2026). National Hurricane Center tropical cyclone report: Hurricane Ian (AL092022). National Hurricane Center.', url: 'https://www.nhc.noaa.gov/data/tcr/AL092022_Ian.pdf' },
+      { text: 'NPR. (2022, October 5). One Florida community built to weather hurricanes endured Ian with barely a scratch.', url: 'https://www.npr.org/2022/10/05/1126900340/florida-community-designed-weather-hurricane-ian-babcock-ranch-solar' },
+      { text: "Reid, R. L. (2024, July 1). How Florida's Babcock Ranch survived Hurricane Ian. Civil Engineering. American Society of Civil Engineers.", url: 'https://www.asce.org/publications-and-news/civil-engineering-source/civil-engineering-magazine/issues/magazine-issue/article/2024/07/how-floridas-babcock-ranch-survived-hurricane-ian' },
+    ],
+  },
+  {
+    slug: 'cuba-hurricane-preparedness',
+    type: 'case-study',
+    section: 'built-environment',
+    tag: 'Preparedness',
+    title: "Cuba's Hurricane Preparedness System",
+    kicker: 'Community-level planning in the Caribbean, 1996 to 2025',
+    date: '2026-09-22',
+    summary: 'With limited money for engineered protection, Cuba has repeatedly evacuated hundreds of thousands of people with very few deaths.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1707074711401-e32052796273?auto=format&fit=crop&w=1400&q=80',
+      alt: 'A palm tree bending in strong wind near the ocean under a stormy sky',
+      caption: 'An approaching storm in the Caribbean. Cuba\'s hurricane preparedness relies less on infrastructure than on organization, repetition, and local knowledge.',
+    },
+    stats: [
+      { label: 'Hurricane Michelle (2001)', value: 'Cat. 4; 712,000 evacuated; 5 deaths' },
+      { label: 'Six hurricanes, 1996–2002', value: 'About 16 deaths total' },
+      { label: 'Hurricane Melissa (2025)', value: '735,000+ evacuated; no deaths reported' },
+    ],
+    body: [
+      { type: 'heading', text: 'Why Cuba is studied' },
+      'Cuba sits in one of the most active hurricane corridors in the Atlantic, and it has limited money for engineered protection. Even so, its record of protecting lives during major storms has made it a frequent subject of disaster research. An Oxfam America study found that six major hurricanes striking Cuba between 1996 and 2002 caused about 16 deaths in Cuba, while the same storms caused hundreds of deaths across the rest of the Caribbean, Central America, and the United States combined (Thompson & Gaviria, 2004). When Category 4 Hurricane Michelle struck in 2001, the worst hurricane to hit Cuba since 1944, authorities evacuated about 712,000 people and five people died (Thompson & Gaviria, 2004). More recently, during Hurricane Melissa in October 2025, Cuba evacuated more than 735,000 people in its eastern provinces and reported no deaths, while the same storm killed dozens in Jamaica and Haiti (NPR, 2025).',
+      { type: 'heading', text: 'How the system works' },
+      "Cuba's approach relies less on infrastructure than on organization, repetition, and local knowledge. Several features stand out:",
+      {
+        type: 'list',
+        items: [
+          { bold: 'Existing leaders run the response.', text: 'Rather than creating a separate emergency bureaucracy, the civil defense system makes provincial and municipal government heads the directors of civil defense in their areas, and heads of schools, hospitals, and workplaces responsible for their staff (Thompson & Gaviria, 2004). The Oxfam authors describe this as centralized decision-making paired with decentralized implementation (Thompson & Gaviria, 2004).' },
+          { bold: 'Staged warnings.', text: 'Response moves through defined phases: an information phase about 72 hours before landfall, an alert phase about 48 hours out when evacuation of high-risk residents begins, an alarm phase during the storm, and a recovery phase afterward (Thompson & Gaviria, 2004).' },
+          { bold: 'Neighborhood risk maps.', text: 'Local organizations and family doctors map who is vulnerable, including elderly residents, pregnant women, and people in weak housing, so that evacuation assistance is planned in advance. These plans are updated every year (Thompson & Gaviria, 2004).' },
+          { bold: 'A national drill.', text: 'Each year, before hurricane season, the two-day "Meteoro" exercise tests response plans across ministries, schools, hospitals, and neighborhoods, then turns to physical preparation such as trimming trees and clearing drains (Thompson & Gaviria, 2004).' },
+          { bold: 'Education.', text: 'Disaster preparedness is part of the school curriculum through ninth grade (Thompson & Gaviria, 2004).' },
+        ],
+      },
+      { type: 'heading', text: 'Limits' },
+      "Cuba's model protects lives more effectively than it protects property. Sociologist B. E. Aguirre argues that Cuba's excellent record in warning and evacuation contrasts with a very poor record in reconstruction, recovery, and long-term mitigation, and that its preparedness success can obscure chronic problems such as poor housing (Aguirre, 2005). Economic scarcity slows reconstruction and limits access to building materials (Thompson & Gaviria, 2004), and aging infrastructure creates new vulnerabilities. In October 2024, Hurricane Oscar struck eastern Cuba during a nationwide power grid collapse caused by failing power plants and fuel shortages, and flooding killed at least six people in the town of San Antonio del Sur (PBS NewsHour, 2024). Some features of the system also depend on Cuba's centralized political structure and are not easily copied elsewhere. The Oxfam authors argue, however, that the core elements are transferable: local government leadership, community risk mapping, annual drills, and a culture of preparedness taught from childhood (Thompson & Gaviria, 2004).",
+      { type: 'heading', text: 'Lessons for South Florida' },
+      'Florida has stronger buildings and more money for recovery, but Hurricane Ian showed that surge still kills people who do not evacuate (Bucci et al., 2023). Cuba\'s experience suggests that knowing in advance who needs help leaving, and rehearsing the plan every year, can save lives even when engineered protection falls short.',
+    ],
+    takeaway:
+      'Preparedness is infrastructure too. Plans, drills, and trusted local networks can protect lives at a fraction of the cost of concrete.',
+    references: [
+      { text: "Aguirre, B. E. (2005). Cuba's disaster management model: Should it be emulated? International Journal of Mass Emergencies and Disasters, 23(3), 55-71.", url: 'https://doi.org/10.1177/028072700502300303' },
+      { text: 'Bucci, L., Alaka, L., Hagen, A., Delgado, S., & Beven, J. (2023, revised 2026). National Hurricane Center tropical cyclone report: Hurricane Ian (AL092022). National Hurricane Center.', url: 'https://www.nhc.noaa.gov/data/tcr/AL092022_Ian.pdf' },
+      { text: 'NPR. (2025, October 30). Haiti, Jamaica and Cuba pick up after Hurricane Melissa.', url: 'https://www.npr.org/2025/10/30/g-s1-95941/haiti-jamaica-cuba-hurricane-melissa-recovery' },
+      { text: 'PBS NewsHour. (2024, October 22). Cuba fights to recover from nationwide blackout and storm that killed six.', url: 'https://www.pbs.org/newshour/world/cuba-fights-to-recover-from-nationwide-blackout-and-storm-that-killed-six' },
+      { text: 'Thompson, M., & Gaviria, I. (2004). Cuba: Weathering the storm: Lessons in risk reduction from Cuba. Oxfam America.', url: 'https://www.oxfamamerica.org/static/media/files/OA-Cuba_Weathering_the_Storm-2004.pdf' },
     ],
   },
 ]

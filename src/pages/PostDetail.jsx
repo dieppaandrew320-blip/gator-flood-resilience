@@ -22,6 +22,50 @@ function BodyBlock({ block }) {
   if (block.type === 'heading') {
     return <h3 className="!mt-8 text-lg font-semibold text-brand-blue-900">{block.text}</h3>
   }
+  if (block.type === 'list') {
+    return (
+      <ul className="list-disc space-y-2 pl-5">
+        {block.items.map((item, i) => (
+          <li key={i}>
+            {typeof item === 'string' ? item : (
+              <>
+                {item.bold && <strong className="text-brand-blue-900">{item.bold} </strong>}
+                {item.text}
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+  if (block.type === 'table') {
+    return (
+      <div className="overflow-x-auto rounded-lg border border-brand-blue-100">
+        <table className="w-full text-left text-sm">
+          <thead>
+            <tr className="bg-brand-blue-50">
+              {block.headers.map((h, i) => (
+                <th key={i} className="px-3 py-2 font-semibold text-brand-blue-900">
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {block.rows.map((row, i) => (
+              <tr key={i} className="border-t border-brand-blue-100">
+                {row.map((cell, j) => (
+                  <td key={j} className="px-3 py-2 align-top">
+                    {cell}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
   return null
 }
 
@@ -43,7 +87,7 @@ export default function PostDetail() {
   }
 
   const backLink = post.type === 'article' ? BACK_LINKS.article : BACK_LINKS[post.section]
-  const eyebrow = post.type === 'article' ? CATEGORY_LABELS[post.category] || 'Article' : 'Case Study'
+  const eyebrow = post.type === 'article' ? CATEGORY_LABELS[post.category] || 'Article' : post.tag || 'Case Study'
 
   return (
     <div>
@@ -73,6 +117,17 @@ export default function PostDetail() {
               <figcaption className="mt-2 text-sm text-brand-blue-500">{post.image.caption}</figcaption>
             )}
           </figure>
+        )}
+
+        {post.stats && post.stats.length > 0 && (
+          <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {post.stats.map((stat, i) => (
+              <div key={i} className="rounded-lg border border-brand-blue-100 bg-white p-3">
+                <p className="text-[11px] font-semibold uppercase tracking-wide text-brand-orange-600">{stat.label}</p>
+                <p className="mt-0.5 text-sm text-brand-blue-800">{stat.value}</p>
+              </div>
+            ))}
+          </div>
         )}
 
         <div className="space-y-4 text-brand-blue-800">
