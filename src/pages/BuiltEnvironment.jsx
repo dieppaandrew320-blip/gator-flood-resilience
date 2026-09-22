@@ -1,6 +1,7 @@
 import PageHeader from '../components/PageHeader'
 import Section from '../components/Section'
 import ComingSoon from '../components/ComingSoon'
+import CaseStudyList from '../components/CaseStudyList'
 
 export default function BuiltEnvironment() {
   return (
@@ -34,7 +35,7 @@ export default function BuiltEnvironment() {
       </Section>
 
       <Section title="Case Studies" subtitle="Real examples of resilient structures." className="bg-brand-blue-50/40">
-        <ComingSoon>Case studies of flood-resilient buildings and infrastructure will be featured here.</ComingSoon>
+        <CaseStudyList section="built-environment" />
       </Section>
 
       <Section title="Coming Later">

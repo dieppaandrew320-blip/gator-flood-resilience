@@ -45,6 +45,42 @@ the structure from the requested site outline is all there; fill it in
 with real content (text, images, links) as it's ready. No page needs to
 be rebuilt from scratch to add content.
 
+## Adding articles & case studies
+
+All article and case-study content lives in one file:
+**`src/content/posts.js`** — a plain JS array. To add a new one, append an
+object to the array:
+
+```js
+{
+  slug: 'unique-url-slug',           // becomes /articles/unique-url-slug
+  type: 'article',                    // or 'case-study'
+  category: 'engineering-explainers', // see CATEGORY_LABELS in the same file (articles only)
+  section: 'built-environment',       // 'built-environment' | 'social-policy' (case studies only)
+  title: 'Article Title',
+  date: '2026-09-22',                 // YYYY-MM-DD
+  author: 'Author Name',              // optional
+  summary: 'One-sentence teaser shown on list/preview cards.',
+  body: [
+    'First paragraph.',
+    'Second paragraph.',
+    // one string per paragraph — no markdown support yet, plain text only
+  ],
+}
+```
+
+- **Articles** (`type: 'article'`) automatically appear on the Articles
+  page (filterable by category), the 3 most recent on the Home page, and
+  get their own page at `/articles/<slug>`.
+- **Case studies** (`type: 'case-study'`) automatically appear on either
+  the Built Environment or Social & Policy page depending on `section`,
+  and get their own page at `/case-studies/<slug>`.
+- An empty `posts` array (the default) shows the original "Coming Soon"
+  placeholders everywhere — nothing else needs to change.
+
+No new files, routes, or components needed per post. Paste the text to
+Claude and it'll add the entry, or edit `src/content/posts.js` directly.
+
 ## Brand colors
 
 Defined in `src/index.css` under `@theme`, sampled from the logo (sunset

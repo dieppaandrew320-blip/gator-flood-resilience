@@ -1,6 +1,7 @@
 import PageHeader from '../components/PageHeader'
 import Section from '../components/Section'
 import ComingSoon from '../components/ComingSoon'
+import CaseStudyList from '../components/CaseStudyList'
 
 export default function SocialPolicy() {
   return (
@@ -35,7 +36,7 @@ export default function SocialPolicy() {
       </Section>
 
       <Section title="Caribbean & South Florida Case Studies" className="bg-brand-blue-50/40">
-        <ComingSoon>Regional case studies on flood policy and community impact.</ComingSoon>
+        <CaseStudyList section="social-policy" />
       </Section>
 
       <Section title="Community Stories & Interviews">

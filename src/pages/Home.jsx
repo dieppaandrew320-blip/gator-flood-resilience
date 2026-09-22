@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { InstagramIcon } from '../components/Header'
 import Section from '../components/Section'
+import { getArticles, CATEGORY_LABELS } from '../content/posts'
 
 const WHAT_WE_DO = [
   {
@@ -24,6 +25,8 @@ const WHAT_WE_DO = [
 ]
 
 export default function Home() {
+  const latestArticles = getArticles().slice(0, 3)
+
   return (
     <div>
       <section className="bg-gradient-to-b from-brand-blue-50 to-white">
@@ -107,14 +110,28 @@ export default function Home() {
 
       <Section title="Latest Articles" subtitle="Research summaries, guides, and stories from our teams.">
         <div className="grid gap-6 sm:grid-cols-3">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="rounded-xl border border-dashed border-brand-blue-200 bg-brand-blue-50/50 p-6">
-              <p className="text-xs font-semibold uppercase tracking-wide text-brand-orange-600">Coming Soon</p>
-              <p className="mt-2 text-sm text-brand-blue-600">
-                Articles from our Built Environment, Social &amp; Policy, and Maps &amp; Data teams will appear here.
-              </p>
-            </div>
-          ))}
+          {latestArticles.length === 0
+            ? [1, 2, 3].map((i) => (
+                <div key={i} className="rounded-xl border border-dashed border-brand-blue-200 bg-brand-blue-50/50 p-6">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-brand-orange-600">Coming Soon</p>
+                  <p className="mt-2 text-sm text-brand-blue-600">
+                    Articles from our Built Environment, Social &amp; Policy, and Maps &amp; Data teams will appear here.
+                  </p>
+                </div>
+              ))
+            : latestArticles.map((article) => (
+                <Link
+                  key={article.slug}
+                  to={`/articles/${article.slug}`}
+                  className="rounded-xl border border-brand-blue-100 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                >
+                  <p className="text-xs font-semibold uppercase tracking-wide text-brand-orange-600">
+                    {CATEGORY_LABELS[article.category] || 'Article'}
+                  </p>
+                  <h3 className="mt-2 font-semibold text-brand-blue-900">{article.title}</h3>
+                  {article.summary && <p className="mt-2 text-sm text-brand-blue-600">{article.summary}</p>}
+                </Link>
+              ))}
         </div>
         <div className="mt-6 text-center">
           <Link to="/articles" className="text-sm font-semibold text-brand-blue-700 hover:text-brand-orange-600">

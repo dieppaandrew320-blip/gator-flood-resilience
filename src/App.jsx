@@ -11,6 +11,7 @@ import GetInvolved from './pages/GetInvolved'
 import Media from './pages/Media'
 import Resources from './pages/Resources'
 import Admin from './pages/Admin'
+import PostDetail from './pages/PostDetail'
 
 function NotFound() {
   return (
@@ -37,6 +38,8 @@ export default function App() {
             <Route path="/social-policy" element={<SocialPolicy />} />
             <Route path="/maps-data" element={<MapsData />} />
             <Route path="/articles" element={<Articles />} />
+            <Route path="/articles/:slug" element={<PostDetail />} />
+            <Route path="/case-studies/:slug" element={<PostDetail />} />
             <Route path="/get-involved" element={<GetInvolved />} />
             <Route path="/media" element={<Media />} />
             <Route path="/resources" element={<Resources />} />
